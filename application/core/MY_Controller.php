@@ -91,9 +91,9 @@ class MY_Controller extends CI_Controller {
      */
     public function view($view)
     {
-        $this->load->view($this->viewFolder . 'header', $this->data);
-        $this->load->view($this->viewFolder . $view,    $this->data);
-        $this->load->view($this->viewFolder . 'footer', $this->data);
+        $this->load->view($this->viewSubFolder . 'header', $this->data);
+        $this->load->view($this->viewSubFolder . $view,    $this->data);
+        $this->load->view($this->viewSubFolder . 'footer', $this->data);
     }
 }
 
