@@ -1,0 +1,40 @@
+#codeigniter-profiler { clear: both; background: #222; opacity: 0.45; padding: 0 5px; font-family: Helvetica, sans-serif; font-size: 10px !important; line-height: 12px; position: absolute; width: auto; min-width: 52em; max-width: 90%; z-index: 1000; display: none; }
+#codeigniter-profiler:hover { background: #101010; opacity: 1.0; }
+
+#codeigniter-profiler.bottom-right { position: fixed; bottom:0; right: 0; -webkit-border-top-left-radius: 7px; -moz-border-radius-topleft: 7px; border-top-left-radius: 7px; -webkit-box-shadow: -1px -1px 10px #222; -moz-box-shadow: -1px -1px 10px #222; box-shadow: -1px -1px 10px #222; }	
+#codeigniter-profiler.bottom-left { position: fixed; bottom:0; left: 0; -webkit-border-top-right-radius: 7px; -moz-border-radius-topright: 7px; border-top-right-radius: 7px; -webkit-box-shadow: 1px -1px 10px #222; -moz-box-shadow: 1px -1px 10px #222; box-shadow: 1px -1px 10px #222; }
+#codeigniter-profiler.top-left { position: fixed; top:0; left: 0; -webkit-border-bottom-right-radius: 7px; -moz-border-radius-bottomright: 7px; border-bottom-right-radius: 7px;-webkit-box-shadow: 1px 1px 10px #222; -moz-box-shadow: 1px 1px 10px #222; box-shadow: 1px 1px 10px #222; }	
+#codeigniter-profiler.top-right { position: fixed; top: 0; right: 0; -webkit-border-bottom-left-radius: 7px; -moz-border-radius-bottomleft: 7px; border-bottom-left-radius: 7px; -webkit-box-shadow: -1px 1px 10px #222; -moz-box-shadow: -1px 1px 10px #222; box-shadow: -1px 1px 10px #222; }	
+
+.ci-profiler-box { padding: 10px; margin: 0 0 10px 0; max-height: 400px; overflow: auto; color: #fff; font-family: Monaco, 'Lucida Console', 'Courier New', monospace; font-size: 11px !important; }
+.ci-profiler-box h2 { font-family: Helvetica, sans-serif; font-weight: bold; font-size: 16px !important; padding: 0; line-height: 2.0; }
+
+#ci-profiler-vars a { text-decoration: none; }
+
+#ci-profiler-menu a:link, #ci-profiler-menu a:visited { display: inline-block; padding: 7px 0; margin: 0; color: #ccc; text-decoration: none; font-weight: lighter; cursor: pointer; text-align: center; width: 15.5%; border-bottom: 4px solid #444; }
+#ci-profiler-menu a:hover, #ci-profiler-menu a.current { background-color: #222; border-color: #999; }
+#ci-profiler-menu a span { display: block; font-weight: bold; font-size: 16px !important; line-height: 1.2; }
+
+#ci-profiler-menu-time span, #ci-profiler-benchmarks h2 { color: #B72F09; }
+#ci-profiler-menu-memory span, #ci-profiler-memory h2 { color: #953FA1; }
+#ci-profiler-menu-queries span, #ci-profiler-queries h2 { color: #3769A0; }
+#ci-profiler-menu-vars span, #ci-profiler-vars h2 { color: #D28C00; }
+#ci-profiler-menu-files span, #ci-profiler-files h2 { color: #5a8616; }
+#ci-profiler-menu-console span, #ci-profiler-console h2 { color: #5a8616; }
+
+#codeigniter-profiler table { width: 100%; }
+#codeigniter-profiler table.main td { padding: 7px 15px; text-align: left; vertical-align: top; color: #aaa; border-bottom: 1px dotted #444; line-height: 1.5; background: #101010 !important; font-size: 12px !important; }
+#codeigniter-profiler table.main tr:hover td { background: #292929 !important; }
+#codeigniter-profiler table.main code { font-family: inherit; padding: 0; background: transparent; border: 0; color: #fff; }
+
+#codeigniter-profiler table .hilight { color: #FFFD70 !important; }
+#codeigniter-profiler table .faded { color: #aaa !important; }
+#codeigniter-profiler table .small { font-size: 10px; letter-spacing: 1px; font-weight: lighter; }
+
+#ci-profiler-menu-exit { background: url(../img/profiler-exit.png) 0% 0% no-repeat; padding-left: 20px; position: absolute; right: 5px; top: 10px; display:none; }
+#ci-profiler-menu-open { background: url(../img/profiler-open.png) 0% 0% no-repeat; z-index: 10000; }
+
+#ci-profiler-menu-open.bottom-right { position: fixed; right: -2px; bottom: 22px; }
+#ci-profiler-menu-open.bottom-left { position: fixed; left: 10px; bottom: 22px; }
+#ci-profiler-menu-open.top-left { position: fixed; left: 10px; top: 22px; }
+#ci-profiler-menu-open.top-right { position: fixed; right: -2px; top: 22px; }
