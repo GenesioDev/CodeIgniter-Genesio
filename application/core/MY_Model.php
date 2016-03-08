@@ -47,11 +47,13 @@ class MY_Model extends CI_Model
      */
     public function getById($id)
     {
-        return $this->db->select('*')
+        $this->hydrate(
+            $this->db->select('*')
             ->from($this->table)
-            ->where($this->pKey, $id);
-
-        $this->hydrate($this->db->get()->result());
+            ->where($this->pKey, $id)
+            ->get()
+            ->result()
+        );
     }
 
     /**
@@ -135,7 +137,11 @@ class MY_Model extends CI_Model
         if($this->exists()) {
             return $this->update($aData);
         } else {
-            return $this->create($aData);
+            if($this->create($aData)) {
+                $this->id = $this->db->insert_id();
+                return TRUE;
+            }
+            return FALSE;
         }
     }
 
