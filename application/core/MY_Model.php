@@ -43,7 +43,8 @@ class MY_Model extends CI_Model
     /**
      * Give the unique row with this id
      *
-     * @param int $id
+     * @param $id
+     * @return $this
      */
     public function getById($id)
     {
@@ -54,16 +55,19 @@ class MY_Model extends CI_Model
             ->get()
             ->result()
         );
+
+        return $this;
     }
 
     /**
-     * Get function
+     * Get function to do a select query
      *
      * @param array $where
-     * @param int $limit
+     * @param null $limit
      * @param int $offset
-     * @param null $order_by
-     * @param string $order_dir
+     * @param null $orderBy
+     * @param string $orderDir
+     * @return $this
      */
     public function get($where = array(), $limit = NULL, $offset = 0, $orderBy = null, $orderDir = 'DESC')
     {
@@ -80,6 +84,8 @@ class MY_Model extends CI_Model
         $this->db->limit($limit, $offset);
 
         $this->hydrate($this->db->get()->result());
+
+        return $this;
     }
 
     /**
@@ -102,6 +108,8 @@ class MY_Model extends CI_Model
             $this->db->where($o->pKey, $o->{$o->pKey})
                 ->delete($this->table);
         }
+
+        return $this;
     }
 
     /**
@@ -125,7 +133,7 @@ class MY_Model extends CI_Model
     /**
      * Save data (create or update if pKey exist)
      *
-     * @return bool
+     * @return $this|bool
      */
     public function save() {
         $aData = array();
@@ -143,6 +151,8 @@ class MY_Model extends CI_Model
             }
             return FALSE;
         }
+
+        return $this;
     }
 
     /**
