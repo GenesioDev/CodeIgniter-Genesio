@@ -21,20 +21,15 @@ class User_model extends MY_Model
      * @param array $not_escaped_fields
      * @return bool
      */
-    public function create($escaped_fields = array(), $not_escaped_fields = array())
+    public function add()
     {
-        // check if $email exist
-        if ($this->db->where(array('email' => $escaped_fields['email']))
-                ->count_all_results($this->table) > 0 ) {
-            return false;
+        if($this->checkUniqField('email')) {
+            $this->generateSalt()
+                ->setEncryptPassword()
+                ->save();;
+        } else {
+            return FALSE;
         }
-
-        // generate salt
-        $escaped_fields['salt'] = $this->generateSalt();
-        // encrypt password
-        $escaped_fields['password'] = $this->encryptPassword($escaped_fields['password'], $escaped_fields['salt']);
-
-        return parent::create($escaped_fields, $not_escaped_fields);
     }
 
     /**
@@ -47,9 +42,9 @@ class User_model extends MY_Model
     public function checkLogin($email, $password)
     {
         // search the user with this email
-        $user = $this->get(array('email', $email));
+        $user = $this->get(array('email' => $email));
 
-        // If we find at least one user (but we must not find more)
+        // If we find at least one user
         if ($user->exists()) {
             $givenPassword = $this->encryptPassword($password, $user->salt);
             if ($givenPassword == $user->password) {
@@ -68,19 +63,12 @@ class User_model extends MY_Model
      * @param $newPassword
      * @return bool
      */
-    public function changePassword($userId, $oldPassword, $newPassword)
+    public function changePassword($newPassword)
     {
-        $user = $this->getById($userId);
-        if ($user->exists()) {
-            // If the old password is good
-            if ($this->encryptPassword($oldPassword, $user->salt) == $user->password) {
-                $this->db->set('password', $this->encryptPassword($newPassword, $user->salt));
-                $this->db->where('id', (int)$user->id);
-                return $this->db->update($this->table);
-            }
-        }
+        $this->password = $newPassword;
+        $this->setEncryptPassword();
 
-        return false;
+        return $this;
     }
 
     /**
@@ -90,7 +78,9 @@ class User_model extends MY_Model
      */
     protected function generateSalt()
     {
-        return sha1(uniqid('salt', TRUE));
+        $this->salt = sha1(uniqid('salt', TRUE));
+
+        return $this;
     }
 
     /**
@@ -103,5 +93,17 @@ class User_model extends MY_Model
     protected function encryptPassword($password, $salt)
     {
         return sha1($password.$salt);
+    }
+
+    /**
+     * Set encrypted password
+     *
+     * @return object
+     */
+    protected function setEncryptPassword()
+    {
+        $this->password = $this->encryptPassword($this->password, $this->salt);
+
+        return $this;
     }
 }
