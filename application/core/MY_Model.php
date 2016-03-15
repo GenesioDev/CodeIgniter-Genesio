@@ -95,8 +95,12 @@ class MY_Model extends CI_Model
      */
     public function delete()
     {
-        return (bool) $this->db->where($this->pKey, $this->{$this->pKey})
-            ->delete($this->table);
+        if($this->exists()) {
+            return (bool)$this->db->where($this->pKey, $this->{$this->pKey})
+                ->delete($this->table);
+        }
+
+        return FALSE;
     }
 
     /**
