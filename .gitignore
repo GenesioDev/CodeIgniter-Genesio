@@ -17,6 +17,10 @@ application/cache/*
 composer.lock
 
 
+# IDE
+.idea
+nbproject/
+
 ### SPECIAL MAC ###
 .DS_Store
 .AppleDouble
