@@ -24,6 +24,28 @@ class MY_Model extends CI_Model
     protected $_fields = array();
 
     /**
+     * List of element for multi results
+     *
+     * @var array
+     */
+    var $all = array();
+
+    /**
+     * Field to put datetime in creation
+     *
+     * @var mixed(boolean|string)
+     */
+    protected $createdAtField = FALSE;
+
+    /**
+     * Field to put datetime in update
+     *
+     * @var mixed(boolean|string)
+     */
+    protected $updatedAtField = FALSE;
+
+
+    /**
      * MY_Model constructor.
      *
      * @param int $id
@@ -142,13 +164,26 @@ class MY_Model extends CI_Model
     public function save() {
         $aData = array();
 
+        $timeSave = date('Y-m-d H:i:s');
+
+        if(!$this->exists()) {
+            if ($this->createdAtField) {
+                $this->{$this->createdAtField} = $timeSave;
+            }
+        }
+
+        if($this->updatedAtField) {
+            $this->{$this->updatedAtField} = $timeSave;
+        }
+
         foreach($this->_fields as $field) {
             $aData[$field] = $this->$field;
         }
 
-        if($this->exists()) {
+
+        if($this->exists()) { // Update
             return $this->update($aData);
-        } else {
+        } else { // Create
             if($this->create($aData)) {
                 $this->id = $this->db->insert_id();
                 return TRUE;
